@@ -1,0 +1,20 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - 'dev-*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Display Message
+        run: echo "CI Pipeline Running Successfully"
+
+      - name: List Files
+        run: ls -la
