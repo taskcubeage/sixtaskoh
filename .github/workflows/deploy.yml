@@ -2,11 +2,31 @@ name: Manual Deployment
 
 on:
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Type DEPLOY to approve deployment"
+        required: true
+        default: ""
 
 jobs:
-  test:
+  deploy:
+    if: github.event.inputs.deploy == 'DEPLOY'
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Hello
-        run: echo "Manual workflow is working!"
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Merge development into testing
+        run: |
+          git checkout testing
+          git merge development --no-edit
+          git push origin testing
