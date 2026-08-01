@@ -4,9 +4,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Hello
-        run: echo "Manual workflow is working!"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test
+        run: echo "Manual Deployment Successful"
