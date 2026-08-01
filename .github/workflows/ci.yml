@@ -1,0 +1,23 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - dev-*
+  pull_request:
+    branches:
+      - development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: CI Started
+        run: echo "CI Workflow Running"
+
+      - name: Display Branch
+        run: echo "Current Branch is ${{ github.ref_name }}"
